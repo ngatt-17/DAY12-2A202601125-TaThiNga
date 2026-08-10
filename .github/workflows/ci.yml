@@ -47,5 +47,5 @@ jobs:
         uses: actions/checkout@v4
       - name: Deploy
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_API_TOKEN: ${{ secrets.RAILWAY_API_TOKEN }}
         run: npx --yes @railway/cli up --detach --service DAY12-2A202601125-TaThiNga --project 74f9a423-7df8-4ca6-a1c1-e25cf5c60e6e --environment production
