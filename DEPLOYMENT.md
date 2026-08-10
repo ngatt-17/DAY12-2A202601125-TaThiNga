@@ -10,7 +10,7 @@
 
 | Mục | Nội dung |
 |-----|----------|
-| Họ và tên | Ta Thi Nga |
+| Họ và tên | Tạ Thị Nga |
 | Mã học viên | 2A202601125 |
 | Repo | DAY12-2A202601125-TaThiNga |
 
