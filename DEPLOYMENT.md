@@ -18,8 +18,8 @@
 
 | Mục | Nội dung |
 |-----|----------|
-| Public URL | Local fallback: http://localhost:8000 |
-| Platform | Railway chưa triển khai; Docker Compose fallback |
+| Public URL | https://day12-2a202601125-tathinga-production.up.railway.app |
+| Platform | Railway |
 | Ngày deploy | 2026-08-10 |
 
 ## Biến Môi Trường Đã Set Trên Cloud
@@ -30,7 +30,7 @@ Ghi tên biến và **nguồn giá trị**, không ghi giá trị:
 |------|--------|---------|
 | `PORT` | ✅ | platform tự gán |
 | `AGENT_API_KEY` | ✅ | đặt trong dashboard, không nằm trong repo |
-| `REDIS_URL` | ✅ | Redis service trong Docker Compose |
+| `REDIS_URL` | ✅ | Redis service trong Railway project |
 | `RATE_LIMIT_PER_MINUTE` | ✅ | 10 |
 | `MONTHLY_BUDGET_USD` | ✅ | 10.0 |
 | `LOG_LEVEL` | ✅ | INFO |
@@ -85,7 +85,7 @@ Local fallback: kiểm tra bằng pytest tests/test_cp5.py -v
 
 ---
 
-## Nếu Dùng Phương Án Dự Phòng
+## Phương Án Dự Phòng
 
 Không đăng ký được tài khoản cloud? Vẫn nộp được bài, nhưng CP5 tối đa 60% điểm:
 
@@ -96,4 +96,4 @@ Không đăng ký được tài khoản cloud? Vẫn nộp được bài, nhưng
    `http://localhost:8000`
 5. Ghi rõ lý do không deploy được vào phần dưới đây:
 
-Không triển khai cloud trong thời gian làm bài; sử dụng Docker Compose fallback.
+Đã triển khai thành công trên Railway; không sử dụng phương án dự phòng.
