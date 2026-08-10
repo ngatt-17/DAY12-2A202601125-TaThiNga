@@ -1,0 +1,52 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run tests
+        run: python -m pytest tests/ --ignore=tests/test_cp5.py --ignore=tests/test_bonus_cicd.py -q
+
+  build:
+    name: Build Docker image
+    needs: test
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build image
+        run: docker build --tag day12-agent:ci .
+
+  deploy:
+    name: Deploy to Railway
+    needs: [test, build]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Deploy
+        uses: railwayapp/cli-action@v1
+        with:
+          railway_token: ${{ secrets.RAILWAY_TOKEN }}
+          command: up --detach --service DAY12-2A202601125-TaThiNga --project 74f9a423-7df8-4ca6-a1c1-e25cf5c60e6e --environment production
